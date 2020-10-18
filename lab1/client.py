@@ -1,31 +1,49 @@
 #!/usr/bin/python
 
-import os, xlsxwriter, subprocess
+import os, xlsxwriter, subprocess, time
+from openpyxl import workbook #pip install openpyxl
+from openpyxl import load_workbook
 from datetime import datetime
 
 number= input('Choose a N for N calls to the service:')
 i=0
 
-#init excel file
-workbook = xlsxwriter.Workbook('lab1.xlsx')
-worksheet = workbook.add_worksheet()
-row = 0
-col=0
+wb = load_workbook(filename = 'lab1.xlsx')
+sheet= wb['Sheet1']
 
-#calls
+first_column = sheet['A']
+
+if len(first_column)==0:
+    starting_row=1
+else:
+    starting_row=len(first_column)+1
+
 while(i<number):
-    now = datetime.now()
 
-    cmd= 'curl -o /dev/null -s -w "%{http_code}" --data "value=100" http://localhost/cgi-bin/lab1.py'
+    os.system("sleep 3")
+    now =datetime.now()
+    
+    cmd= 'curl -o /dev/null -s -w "%{http_code}" --data "value=100" http://35.228.185.222/cgi-bin/lab1.py'
     http_code=subprocess.check_output(cmd, shell=True)
-    os.system('sleep 2')
+
     if(http_code == "200"):
+       
         after = datetime.now()
-        worksheet.write(row,0,after-now)
-        row += 1
+
+        sheet.cell(row=starting_row, column= 1).value= (after-now).total_seconds()*1000 #write in miliseconfs
+
+        starting_row += 1
     i += 1
 
-worksheet.write(row, 0, 'Medium')
-worksheet.write(row, 1, '=AVERAGE(A1:A5)*10^5')
+sheet.cell(row=1, column=3).value = "Average: "
+sheet.cell(row=1, column=4).value = '=AVERAGE(A:A)'
+sheet.cell(row=1, column=5).value = "Std Deviation: "
+sheet.cell(row=1, column=6).value = "=STDEV(A:A)"
+sheet.cell(row=1, column=7).value = "Confidence:"
+sheet.cell(row=1, column=8).value = "=CONFIDENCE(0.05,STDEV(A:A), COUNT(A:A))"
+sheet.cell(row=3, column=3).value = "5% of average:"
+sheet.cell(row=3, column=4).value = "=0.05*D1"
 
-workbook.close()
+
+
+wb.save('lab1.xlsx')
