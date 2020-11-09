@@ -1,0 +1,26 @@
+body{
+    font-family: Geneva, serif, Geneva, Tahoma, sans-serif;
+}
+body, html {
+    height: 100%;
+  }
+body {
+    background-color:#E8E8E8;
+    background-image: url("bg.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h1{
+    font-weight:bold;
+    font-size: 200%;
+    padding: 25px 25px 25px 25px;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    background-color:white;
+    opacity: 0.70;    
+}
