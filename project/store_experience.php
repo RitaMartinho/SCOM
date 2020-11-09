@@ -40,8 +40,8 @@
         if("" == trim($_POST['user_experience'])){
            die("You didn't fulfill the form. Please go back.");
         }      
-    ?>
-    <?php if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         echo "i'm here\n";
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {

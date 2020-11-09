@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html>
- <head>
-  <title>Evaluate Eduroam</title>
-  <link href="index.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluate Eduroam</title>
+    <link href="index.css" rel="stylesheet">
  </head>
  <body>
     <img src="feup.png" alt="feup logo" width="250" height="100"> 
@@ -29,7 +32,7 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-   
+
     <div class="container">
         <form action="store_lostconnection.php" method="POST" id = "form2">
             <p>Did you lost connection in the previous 30min?</p>
