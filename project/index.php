@@ -24,15 +24,15 @@
         <form action="store_experience.php" method="POST" id="form1">
             <p>How would you evaluate your current experience (1 being horrible and 5 incredible) ?</p>
             <input type="radio" id="input1" name="user_experience" value=1>
-            <label for="user_experience1">1</label><br>
+            <label for="input1">1</label><br>
             <input type="radio" id="input2" name="user_experience" value=2>
-            <label for="user_experience2">2</label><br>
+            <label for="input2">2</label><br>
             <input type="radio" id="input3" name="user_experience" value=3>
-            <label for="user_experience3">3</label><br>
+            <label for="input3">3</label><br>
             <input type="radio" id="input4" name="user_experience" value=4>
-            <label for="user_experience4">4</label><br>
+            <label for="input4">4</label><br>
             <input type="radio" id="input5" name="user_experience" value=5>
-            <label for="user_experience5">5</label><br>
+            <label for="input5">5</label><br>
             <input type="submit" value="Submit">
         </form>
     </div>
