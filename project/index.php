@@ -19,23 +19,23 @@
     <div class="container">
         <form action="store_experience.php" method="POST" id="form1">
             <p>How would you evaluate your current experience (1 being horrible and 5 incredible) ?</p>
-            <input type="radio" id="input1" name="user_experience" value=1>
-            <label for="user_experience1">1</label><br>
-            <input type="radio" id="input2" name="user_experience" value=2>
-            <label for="user_experience2">2</label><br>
-            <input type="radio" id="input3" name="user_experience" value=3>
-            <label for="user_experience3">3</label><br>
-            <input type="radio" id="input4" name="user_experience" value=4>
-            <label for="user_experience4">4</label><br>
-            <input type="radio" id="input5" name="user_experience" value=5>
-            <label for="user_experience5">5</label><br>
+            <input type="radio" id="input1" name="user_experience" value=0>
+            <label for="input1">0</label><br>
+            <input type="radio" id="input2" name="user_experience" value=1>
+            <label for="input2">1</label><br>
+            <input type="radio" id="input3" name="user_experience" value=2>
+            <label for="input3">2</label><br>
+            <input type="radio" id="input4" name="user_experience" value=3>
+            <label for="input4">3</label><br>
+            <input type="radio" id="input5" name="user_experience" value=4>
+            <label for="input5">4</label><br>
             <input type="submit" value="Submit">
         </form>
     </div>
 
     <div class="container">
         <form action="store_lostconnection.php" method="POST" id = "form2">
-            <p>Did you lost connection in the previous 30min?</p>
+            <p>Did you lost connection in the last hour?</p>
             <input type="submit" value="Report Lost">
         </form>
     </div>   

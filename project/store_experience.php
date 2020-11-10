@@ -58,9 +58,9 @@
                 var bps = (loadedBits / timeDuration).toFixed(2); 
                 var speedInKbps = (bps / 1024).toFixed(2); 
                 var speedInMbps = (speedInKbps / 1024).toFixed(2); 
-                //alert("Your internet connection speed is: \n" 
-                      //+ bps + " bps\n" + speedInKbps  
-                      //+ " kbps\n" + speedInMbps + " Mbps\n"); 
+                alert("Your internet connection speed is: \n" 
+                      + bps + " bps\n" + speedInKbps  
+                      + " kbps\n" + speedInMbps + " Mbps\n"); 
 
                 netspeed.name=speedInMbps;
 
@@ -72,7 +72,6 @@
                         console.log(res);
                     }
                 })
-                
             } 
             
         </script>
