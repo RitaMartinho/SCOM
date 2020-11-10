@@ -2,6 +2,10 @@
  <head>
   <title>Evaluate Eduroam</title>
   <link href="store.css" rel="stylesheet">
+  <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
  </head>
  <body>
 
@@ -12,19 +16,12 @@
         }      
     
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        echo "i'm here\n";
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        echo "i'm here1\n";
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
     } else {
-        echo "i'm here2\n";
         $ip = $_SERVER['REMOTE_ADDR'];
     }
-
-    echo "Today is: " . date("d-m-Y") . "<br>";
-    echo "The time is: " . date("H:i"). "<br>";
-    echo "User experience:".$_POST["user_experience"];
 
     $date=date("d-m-Y")." ";
     $hour=date("H:i")." ";
@@ -32,9 +29,52 @@
     $towrite = $date.$hour.$userlevel.$ip;
 
     $myfile = fopen("userexperience.txt", "a")or die("Unable to open file!");
-    fwrite($myfile, " ".$towrite);
+    fwrite($myfile, "\n".$towrite);
     fclose($myfile);
 
     ?>
- </body>
+    <script type="text/javascript"> 
+            var userImageLink = "https://effigis.com/wp-content/uploads/2015/02/DigitalGlobe_WorldView2_50cm_8bit_Pansharpened_RGB_DRA_Rome_Italy_2009DEC10_8bits_sub_r_1.jpg";
+            var time_start, end_time; 
+            
+            // The size in bytes 
+            var downloadSize = 17878139; 
+            var downloadImgSrc = new Image(); 
+  
+            downloadImgSrc.onload = function () { 
+                end_time = new Date().getTime(); 
+                displaySpeed(); 
+            }; 
+
+            time_start = new Date().getTime(); 
+            downloadImgSrc.src = userImageLink; 
+  
+            function displaySpeed() { 
+                var timeDuration = (end_time - time_start) / 1000; 
+                var loadedBits = downloadSize * 8; 
+                var netspeed = {};                
+                /* Converts a number into string 
+                   using toFixed(2) rounding to 2 */
+                var bps = (loadedBits / timeDuration).toFixed(2); 
+                var speedInKbps = (bps / 1024).toFixed(2); 
+                var speedInMbps = (speedInKbps / 1024).toFixed(2); 
+                //alert("Your internet connection speed is: \n" 
+                      //+ bps + " bps\n" + speedInKbps  
+                      //+ " kbps\n" + speedInMbps + " Mbps\n"); 
+
+                netspeed.name=speedInMbps;
+
+                $.ajax({
+                    url:"store_network_speed.php",
+                    type:'POST',
+                    data: netspeed,
+                    success: function(res){
+                        console.log(res);
+                    }
+                })
+                
+            } 
+            
+        </script>
+    </body>
 </html>

@@ -8,6 +8,6 @@
         $towrite=$value;
     }
     $myfile = fopen("userexperience.txt", "a")or die("Unable to open file!");
-    fwrite($myfile, "\n".$towrite);
+    fwrite($myfile, " ".$towrite);
     fclose($myfile);
 ?>

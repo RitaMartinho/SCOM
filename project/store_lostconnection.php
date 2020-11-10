@@ -13,10 +13,6 @@
     } else {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
-
-    echo "Today is: " . date("d-m-Y") . "<br>";
-    echo "The time is: " . date("H:i"). "<br>";
-
     $date=date("d-m-Y")." ";
     $hour=date("H:i")." ";
 
