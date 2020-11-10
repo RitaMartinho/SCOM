@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
     <title>Evaluate Eduroam</title>
     <link href="index.css" rel="stylesheet">
  </head>
@@ -39,6 +43,50 @@
             <input type="submit" value="Report Lost">
         </form>
     </div>   
+
+    <script type="text/javascript"> 
+            var userImageLink = "https://effigis.com/wp-content/uploads/2015/02/DigitalGlobe_WorldView2_50cm_8bit_Pansharpened_RGB_DRA_Rome_Italy_2009DEC10_8bits_sub_r_1.jpg";
+            var time_start, end_time; 
+            
+            // The size in bytes 
+            var downloadSize = 17878139; 
+            var downloadImgSrc = new Image(); 
+  
+            downloadImgSrc.onload = function () { 
+                end_time = new Date().getTime(); 
+                displaySpeed(); 
+            }; 
+
+            time_start = new Date().getTime(); 
+            downloadImgSrc.src = userImageLink; 
+  
+            function displaySpeed() { 
+                var timeDuration = (end_time - time_start) / 10; 
+                var loadedBits = downloadSize * 8; 
+                var netspeed = {};                
+                /* Converts a number into string 
+                   using toFixed(2) rounding to 2 */
+                var bps = (loadedBits / timeDuration).toFixed(2); 
+                var speedInKbps = (bps / 1024).toFixed(2); 
+                var speedInMbps = (speedInKbps / 1024).toFixed(2); 
+                alert("Your internet connection speed is: \n" 
+                      + bps + " bps\n" + speedInKbps  
+                      + " kbps\n" + speedInMbps + " Mbps\n"); 
+
+                netspeed.name=speedInMbps;
+
+                $.ajax({
+                    url:"store_network_speed.php",
+                    type:'POST',
+                    data: netspeed,
+                    success: function(res){
+                        console.log(res);
+                    }
+                })
+                
+            } 
+            
+        </script> 
      
  </body>
 </html>

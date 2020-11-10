@@ -6,36 +6,6 @@
  <body>
 
     <h1>Thank you!</h1>
-
-    <script type="text/javascript"> 
-            var userImageLink = "50mb.jpg";
-            var time_start, end_time; 
-            
-            // The size in bytes 
-            var downloadSize = 41026764; 
-            var downloadImgSrc = new Image(); 
-  
-            downloadImgSrc.onload = function () { 
-                end_time = new Date().getTime(); 
-                displaySpeed(); 
-            }; 
-            time_start = new Date().getTime(); 
-            downloadImgSrc.src = userImageLink; 
-  
-            function displaySpeed() { 
-                var timeDuration = (end_time - time_start) / 1000 +0.001; 
-                var loadedBits = downloadSize * 8; 
-                
-                /* Converts a number into string 
-                   using toFixed(2) rounding to 2 */
-                var bps = (loadedBits / timeDuration).toFixed(2); 
-                var speedInKbps = (bps / 1024).toFixed(2); 
-                var speedInMbps = (speedInKbps / 1024).toFixed(2); 
-                alert("Your internet connection speed is: \n" 
-                      + bps + " bps\n" + speedInKbps  
-                      + " kbps\n" + speedInMbps + " Mbps\n"); 
-            } 
-        </script> 
     <?php
         if("" == trim($_POST['user_experience'])){
            die("You didn't fulfill the form. Please go back.");
@@ -59,11 +29,10 @@
     $date=date("d-m-Y")." ";
     $hour=date("H:i")." ";
     $userlevel=$_POST["user_experience"]." ";
-
     $towrite = $date.$hour.$userlevel.$ip;
 
     $myfile = fopen("userexperience.txt", "a")or die("Unable to open file!");
-    fwrite($myfile, "\n".$towrite);
+    fwrite($myfile, " ".$towrite);
     fclose($myfile);
 
     ?>
