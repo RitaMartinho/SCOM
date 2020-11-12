@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluate Eduroam</title>
     <link href="index.css" rel="stylesheet">
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
  </head>
  <body>
     <img src="feup.png" alt="feup logo" width="250" height="100"> 
@@ -18,7 +22,7 @@
 
     <div class="container">
         <form action="store_experience.php" method="POST" id="form1">
-            <p>How would you evaluate your current experience (1 being horrible and 5 incredible) ?</p>
+            <p>How would you evaluate your current experience (0 being horrible and 4 incredible) ?</p>
             <input type="radio" id="input1" name="user_experience" value=0>
             <label for="input1">0</label><br>
             <input type="radio" id="input2" name="user_experience" value=1>
@@ -38,6 +42,25 @@
             <p>Did you lost connection in the last hour?</p>
             <input type="submit" value="Report Lost">
         </form>
-    </div>   
+    </div>
+    <script>
+
+        window.onload=function(){
+        if(navigator.geolocation)
+        {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else
+        {
+        alert("Geolocation is not supported by this browser.");
+        }
+        }
+        function showPosition(pos){
+        $.post('store_network_speed.php',{'lat':pos.coords.latitude,'lng':pos.coords.longitude},function(res){
+            console.log(res);
+        });
+        }
+
+    </script>
  </body>
 </html>

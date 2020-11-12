@@ -32,7 +32,7 @@
       foreach($lines as $hourminute){
 
         $firstelement=explode(" ", $hourminute);
-        array_push($net_exp, array("experience"=>$firstelement[2],"netspeed"=>$firstelement[4]));
+        array_push($net_exp, array("experience"=>$firstelement[2],"netspeed"=>$firstelement[5]));
       }
 
       for($i=0; $i<=4; $i++){

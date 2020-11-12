@@ -16,26 +16,28 @@ body {
 img{
     padding-top: 2%;
     padding-left: 2%;
+    position: fixed;
 }
 
 h1{
     font-weight:bold;
-    font-size: 200%;
-    padding: 25px 25px 25px 25px;
+    font-size: 280%;
+    padding: 25px 60px 25px 60px;
     position: fixed;
     top: 15%;
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
     background-color: #D3D3D3;
-    opacity: 0.85;    
+    opacity: 0.85;  
+    text-align: center;  
 }
 
 #form1{
     font-size: 125%;
     padding: 5px 5px 5px 5px;
     position: fixed;
-    top: 40%;
+    top: 47%;
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);

@@ -34,7 +34,7 @@
 
         $firstelement=explode(" ", $hourminute);
         $hour_without_minute= explode(":", $firstelement[1]);
-        array_push($net_hour, array("hour"=>$hour_without_minute[0],"netspeed"=>$firstelement[4]));
+        array_push($net_hour, array("hour"=>$hour_without_minute[0],"netspeed"=>$firstelement[5]));
       }
 
       for($i=0; $i<=23; $i++){
