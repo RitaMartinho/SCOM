@@ -75,6 +75,10 @@
     
     <div class="container">
         <canvas id="myChart"></canvas>
+        <div class="buttoncontainer">
+          <button onclick="window.location.href='seemore1.php'">Previous</button>
+          <button onclick="window.location.href='seemore3.php'" id= "button">Next</button>
+        </div>
     </div>
     
     <script type="text/javascript"> //lost connections
@@ -155,10 +159,5 @@
           }
         });
     </script>
-
-    <div class="buttoncontainer">
-      <button onclick="window.location.href='seemore1.php'">Previous</button>
-      <button onclick="window.location.href='hi'">Next</button>
-    </div>
 </body>
 </html>

@@ -102,6 +102,10 @@
     <!---<iframe id='iframe' src = 'hitsbyhour.txt' onload='readfile()'style="width:0;height:0;border:0; border:none;"> </iframe>-->
     <div class="container">
         <canvas id="myChart"></canvas>
+        <div class="buttoncontainer">
+          <button onclick="window.location.href='seemore4.php'">Previous</button>
+          <button onclick="window.location.href='seemore2.php'" id= "button">Next</button>
+        </div>
     </div>
     
     <script type="text/javascript"> //lost connections
@@ -309,12 +313,5 @@
           }
         });
     </script>
-
-    <div class="buttoncontainer">
-      <button onclick="window.location.href='seemore.php'">Previous</button>
-      <button onclick="window.location.href='seemore2.php'">Next</button>
-    </div>
-
-
 </body>
 </html>

@@ -36,37 +36,19 @@
 
         <div class="container">
             <form action="store_lostconnection.php" method="POST" id = "form2">
-                <p>Did you lost connection in the last hour?</p>
+                <p>Did you lost connection in the last 10 minutes?</p>
                 <input type="submit" value="Report Lost">
             </form>
         </div>
 
         <div id="warning">
             <h4 class="warn">This website measures your current network speed and also retrieves your location within FEUP</h4>
+            <h5>On the next page, please accept access to your location</h5>
         </div>
 
         <img class= "ex" src="exclamacao.png" alt="feup logo" width="45" height="45"> 
 
     </div>
     
-    <script>
-
-        window.onload=function(){
-        if(navigator.geolocation)
-        {
-        navigator.geolocation.getCurrentPosition(showPosition);
-        }
-        else
-        {
-        alert("Geolocation is not supported by this browser.");
-        }
-        }
-        function showPosition(pos){
-        $.post('store_network_speed.php',{'lat':pos.coords.latitude,'lng':pos.coords.longitude},function(res){
-            console.log(res);
-        });
-        }
-
-    </script>
  </body>
 </html>

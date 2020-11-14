@@ -16,37 +16,31 @@
       $file = fopen("lostconnection.txt", "r");
       $lines = array();
       $firstelement =array();
-      $hourminutearray= array();
-      $hour = array();
-      $hitsbyhour=array_fill(0,24, '0');
+      $local= array();
+      $hitsbylocal=array_fill(0,12, '0');
       while(! feof($file))
       {
         $line= fgets($file). "<br />";
         array_push($lines, $line);
       }
 
-      foreach($lines as $hourminute){
+      foreach($lines as $line){
 
-        $firstelement=explode(" ", $hourminute);
-        array_push($hourminutearray, $firstelement[1]);
+        $firstelement=explode(" ", $line);
+        array_push($local, $firstelement[3]);
       }
 
-      foreach($hourminutearray as $hours){
-        $firstelementaux=explode(":", $hours);
-        array_push($hour, $firstelementaux[0]);
-      }
+      for($i=0; $i<=12; $i++){
 
-      for($i=0; $i<=23; $i++){
-
-        foreach($hour as $entry){
+        foreach($local as $entry){
           if (intval($entry)== $i){
-            $hitsbyhour[$i]+=1;
+            $hitsbylocal[$i]+=1;
           }
         }
       }
-      $myfile = fopen('txtfiles_todisplay/hitsbyhour_.txt', 'w+') or die("Unable to open file!");
+      $myfile = fopen('txtfiles_todisplay/hitsbylocal.txt', 'w+') or die("Unable to open file!");
       
-      foreach($hitsbyhour as $item){
+      foreach($hitsbylocal as $item){
         fwrite($myfile, $item."\n");
       }
       fclose($file);
@@ -56,7 +50,8 @@
     <div class="container">
         <canvas id="myChart"></canvas>
         <div class="buttoncontainer">
-          <button onclick="window.location.href='seemore4.php'" id= "button">Next</button>
+          <button onclick="window.location.href='seemore.php'">Previous</button>
+          <button onclick="window.location.href='seemore1.php'" id= "button">Next</button>
         </div>
     </div>
     
@@ -66,7 +61,7 @@
 
         //read from file 
         var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", "txtfiles_todisplay/hitsbyhour_.txt", false); // using synchronous call
+        rawFile.open("GET", "txtfiles_todisplay/hitsbylocal.txt", false); // using synchronous call
         var allText;
         //alert("Starting to read text");
         rawFile.onreadystatechange = function ()
@@ -87,10 +82,10 @@
         Chart.defaults.global.defaultFontSize = 18;
         Chart.defaults.global.defaultFontColor = '#777';
 
-        var hours =['00h', '01h', '02h','03h','04h','05h', '06h','07h','08h','09h','10h','11h','12h','13h','14h','15h','16h','17h','18h','19h','20h','21h','22h','23h'];
+        var hours =['Unknown', 'Civil Norte', 'Eletro Norte','Mecanica Norte','Mecanica Sul','Biblioteca', 'Eletro/Info','CICA','Civil','Quimica/Metal','Bar de Minas','Direção','B'];
 
         let massPopChart = new Chart(myChart, {
-          type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
           data:{
             labels: hours,
             datasets:[{
@@ -108,19 +103,22 @@
                     res[10],
                     res[11],
                     res[12],
-                    res[13],
-                    res[14],
-                    res[15],
-                    res[16],
-                    res[17],
-                    res[18],
-                    res[19],
-                    res[20],
-                    res[21],
-                    res[22],
-                    res[23]
               ],
-              backgroundColor:'lightblue',
+              backgroundColor:[
+                'rgb(180,196,104, 0.8)',
+                'rgb(237,85,85, 0.8)',
+                'rgb(184,167,234, 0.8)',
+                'rgb(0,174,219, 0.8)',
+                'rgb(255,0,169, 0.8)',
+                'rgb(251,159,159, 0.8)',
+                'rgb(255,0,101, 0.8)',
+                'rgb(212,255,234, 0.8)',
+                'rgb(254,255,163, 0.8)',
+                'rgb(142,193,39, 0.8)',
+                'rgb(236,185,57, 0.8)',
+                'rgb(131,3,3, 0.8)',
+                'rgb(46,64,69, 0.8)',
+              ],
               borderWidth:1,
               borderColor:'#777',
               hoverBorderWidth:3,
@@ -130,7 +128,7 @@
           options:{
             title:{
               display:true,
-              text:'FEUP Eduroam - Number of lost connections per hour',
+              text:'FEUP Eduroam - Number of lost connections per location',
               fontSize:30
             },
             legend:{

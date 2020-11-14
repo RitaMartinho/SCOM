@@ -18,12 +18,7 @@ body {
     margin-top: 5%;
 }
 
-.buttoncontainer{
-    text-align: center;
-    display: inline-block;
-    font-size: 20px;
-    transform: translate(-50%, -50%);
-    position: fixed;
-    top: 90%;
-    left: 50%;
+.container button{
+
+    font-size: 150%;
 }
