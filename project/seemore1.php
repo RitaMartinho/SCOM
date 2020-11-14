@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="seemore.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
    
@@ -308,5 +309,12 @@
           }
         });
     </script>
+
+    <div class="buttoncontainer">
+      <button onclick="window.location.href='seemore.php'">Previous</button>
+      <button onclick="window.location.href='seemore2.php'">Next</button>
+    </div>
+
+
 </body>
 </html>

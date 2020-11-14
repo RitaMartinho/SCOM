@@ -1,96 +1,60 @@
 body{
     font-family: Geneva, serif, Geneva, Tahoma, sans-serif;
 }
-body, html {
-    height: 100%;
-  }
+
 body {
     background-color:#E8E8E8;
     background-image: url("bg.jpg");
-    height: 100%; 
+    height: 200%; 
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
 }
 
-img{
-    padding-top: 2%;
-    padding-left: 2%;
-    position: fixed;
+.containertotal{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    opacity: 0.8;
+    padding: 1%;
+    margin: 10%;
+    margin-top: 5%;
 }
 
 h1{
-    font-weight:bold;
-    font-size: 280%;
-    padding: 25px 60px 25px 60px;
-    position: fixed;
-    top: 15%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-    background-color: #D3D3D3;
-    opacity: 0.85;  
+
     text-align: center;  
 }
 
 #form1{
-    font-size: 125%;
-    padding: 5px 5px 5px 5px;
-    position: fixed;
-    top: 47%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-    background-color: white;
-    opacity: 0.8;
+    background-color:#DCDCDC;
+    padding: 2%;
+    margin: 1%;
 }
 
 #form2{
-    padding: 10px 10px 10px 10px;
-    position: fixed;
-    top: 70%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-    background-color: white;
-    opacity: 0.8;
+    background-color:#DCDCDC;
+    padding: 2%;
+    margin: 1%;
 }
 
 input[type=submit] {
     font-size: 100%;
     padding:5px 15px; 
-    background:#D3D3D3;
+    background:#A9A9A9;
     border:0 none;
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
 }
-
 .container{
 
     text-align: center;
 }
 
 #warning{
-    font-weight:bold;
-    font-size: 70%;
-    padding: 10px 10px 10px 10px;
-    position: fixed;
-    top: 85%;
-    left: 52%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-    background-color: white;
-    opacity: 0.8;  
-}
-
-.ex{
-    position: fixed;
-    top: 85%;
-    left: 31%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    opacity: 0.8;  
-    padding: 10px 10px 10px 10px;
-
+    text-align: center;
 }
