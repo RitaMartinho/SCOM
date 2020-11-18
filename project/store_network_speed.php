@@ -1,8 +1,8 @@
 <?php
-    $speed = array();
-    $speed= $_POST;
+    $measurements = array();
+    $measurements= $_GET;
 
-    foreach ($speed as $value){
+    foreach ($measurements as $value){
         $towrite=$value;
     }
     $myfile = fopen("userexperience.txt", "a")or die("Unable to open file!");
