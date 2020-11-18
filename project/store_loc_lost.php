@@ -4,8 +4,8 @@
 
    
     
-    $lat=intval($_POST["lat"]);
-    $long=intval($_POST["lng"]);
+    $lat=floatval($_POST["lat"]);
+    $long=floatval($_POST["lng"]);
     $long=abs($long);
 
     $loc=0;
