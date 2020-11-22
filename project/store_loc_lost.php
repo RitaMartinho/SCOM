@@ -139,7 +139,11 @@
     }
 
     $local= $_POST["lat"]." ".$_POST["lng"];
-
-    fwrite($myfile, " ".$loc." ".$local);
+    
+    if (flock($myfile, LOCK_EX)) {
+        
+        fwrite($myfile, " ".$loc." ".$local);
+        flock($myfile, LOCK_UN);
+    }
     fclose($myfile);
 ?>

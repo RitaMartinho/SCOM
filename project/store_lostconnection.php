@@ -29,7 +29,11 @@
     $towrite = $date.$hour.$ip;
 
     $myfile = fopen("lostconnection.txt", "a")or die("Unable to open file!");
-    fwrite($myfile, "\n".$towrite);
+
+    if (flock($myfile, LOCK_EX)) {
+        fwrite($myfile, "\n".$towrite);
+        flock($myfile, LOCK_UN);
+    }
     fclose($myfile);
 
     ?>

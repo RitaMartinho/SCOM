@@ -33,7 +33,7 @@
       foreach($lines as $hourminute){
 
         $firstelement=explode(" ", $hourminute);
-        array_push($net_exp, array("experience"=>$firstelement[2],"netspeed"=>$firstelement[5]));
+        array_push($net_exp, array("experience"=>$firstelement[2],"netspeed"=>$firstelement[8]));
       }
 
       for($i=0; $i<=4; $i++){
@@ -76,7 +76,7 @@
     <div class="container">
         <canvas id="myChart"></canvas>
         <div class="buttoncontainer">
-          <button onclick="window.location.href='seemore1.php'">Previous</button>
+          <button onclick="window.location.href='seemore5.php'">Previous</button>
           <button onclick="window.location.href='seemore3.php'" id= "button">Next</button>
         </div>
     </div>
@@ -111,7 +111,7 @@
 
         var experience =['User Experience - 0', 'User Experience - 1', 'User Experience - 2','User Experience - 3','User Experience - 4'];
         let massPopChart = new Chart(myChart, {
-          type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
           data:{
             labels: experience,
             datasets:[
@@ -134,7 +134,7 @@
           options:{
             title:{
               display:true,
-              text:'FEUP Eduroam - Network Speed (in Mbps) vs User Experience',
+              text:'FEUP Eduroam - Network Speed (in Kbps) vs User Experience',
               fontSize:30
             },
             legend:{

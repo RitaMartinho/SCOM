@@ -35,7 +35,7 @@
 
         $firstelement=explode(" ", $hourminute);
         $hour_without_minute= explode(":", $firstelement[1]);
-        array_push($net_hour, array("hour"=>$hour_without_minute[0],"netspeed"=>$firstelement[5]));
+        array_push($net_hour, array("hour"=>$hour_without_minute[0],"netspeed"=>$firstelement[8]));
       }
 
       for($i=0; $i<=23; $i++){
@@ -76,7 +76,6 @@
         }
 
       }
-
       $myfile = fopen('txtfiles_todisplay/mediumspeed_by_hour.txt', 'w+') or die("Unable to open file!");
       foreach($mediumbyhour as $item){
         fwrite($myfile, $item."\n");
@@ -104,7 +103,7 @@
         <canvas id="myChart"></canvas>
         <div class="buttoncontainer">
           <button onclick="window.location.href='seemore4.php'">Previous</button>
-          <button onclick="window.location.href='seemore2.php'" id= "button">Next</button>
+          <button onclick="window.location.href='seemore5.php'" id= "button">Next</button>
         </div>
     </div>
     
@@ -289,7 +288,7 @@
           options:{
             title:{
               display:true,
-              text:'FEUP Eduroam - Network Speed (in Mpbs) per hour',
+              text:'FEUP Eduroam - Network Speed (in Kpbs) per hour',
               fontSize:30
             },
             legend:{

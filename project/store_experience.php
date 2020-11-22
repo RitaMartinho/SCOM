@@ -2,10 +2,17 @@
  <head>
   <title>Evaluate Eduroam</title>
   <link href="store.css" rel="stylesheet">
-  <script src="boomerang.js" type="text/javascript"></script>
-  <script src="plugins/bw.js" type="text/javascript"></script>
-  <script type="text/javascript">
-	BOOMR.init({
+  <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
+              <script src="boomerang.js" type="text/javascript"></script>
+    <script src="plugins/bw.js" type="text/javascript"></script>
+    <script src="plugins/rt.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+	    BOOMR.init({
 			user_ip: '10.0.0.1',
 			beacon_url: "store_network_speed.php",
 			BW: {
@@ -18,21 +25,29 @@
 			RT: {
 				cookie: 'HOWTO-RT'
 			}
-		});</script>
+		});
+        BOOMR.subscribe('before_beacon', function(o) {
+            var html = "";
+            if(o.t_done) { html += "This page took " + o.t_done + "ms to load<br>"; }
+            if(o.bw) { html += "Your bandwidth to this server is " + parseInt(o.bw/1024) + "kbps (&#x00b1;" + parseInt(o.bw_err*100/o.bw) + "%)<br>"; }
+            if(o.lat) { html += "Your latency to this server is " + parseInt(o.lat) + "&#x00b1;" + o.lat_err + "ms<br>"; }
+            
+            document.getElementById('results').innerHTML = html;
+        });
 
-  <!-- <script
-			  src="https://code.jquery.com/jquery-3.5.1.js"
-			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-			  crossorigin="anonymous"></script> -->
+    </script>
  </head>
+ 
  <body>
 
     <div class="container">
         <h1>Thank you! </h1>
-        <h5>(Please wait until you accept location permissions)</h5>
+        <h4>(Please WAIT until you accept location permissions and you see here some info about network status)</h4>
+        <p id="results"></p>
     </div>
     
     
+   
     <?php
         if("" == trim($_POST['user_experience'])){
            die("You didn't fulfill the form. Please go back.");
@@ -82,11 +97,16 @@
     $towrite = $date.$hour.$userlevel.$ip." ".getBrowser();
 
     $myfile = fopen("userexperience.txt", "a")or die("Unable to open file!");
-    fwrite($myfile, "\n".$towrite);
+
+    if (flock($myfile, LOCK_EX)) {
+
+        fwrite($myfile, "\n".$towrite);
+        flock($myfile, LOCK_UN);
+    }
     fclose($myfile);
 
     ?>
-     <script>
+    <script>
 
         window.onload=function(){
         if(navigator.geolocation)

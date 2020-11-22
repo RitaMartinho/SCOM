@@ -12,14 +12,14 @@
 </head>
 <body>
     <?php
-      //RETRIEVE NUMBER OF LOST CONNECTIONS PER HOUR
+
       $file = fopen("userexperience.txt", "r");
       $lines = array();
-      $firstelement =array();
-      $hourminutearray= array();
-      $netspeed= array();
-      $browser=array();
-      $hitsbyexp=array_fill(0,11,'0');
+      $element =array();
+      $browser_speed=array();
+      $browser_index_speed=array();
+      $mediumbybrowser=array_fill(0,8,'0');
+      $hitsbybrowser=array_fill(0,8,'0');
      
 
       while(! feof($file))
@@ -30,15 +30,93 @@
 
       foreach($lines as $line){
 
-        $firstelement=explode(" ", $line);
-        array_push($browser, $firstelement[4]);
+        $element=explode(" ", $line);
+        array_push($browser_speed, array("browser"=>$element[4],"netspeed"=>$element[8]));
+
       }
-      print_r($browser);
+
      
+      foreach($browser_speed as $entry){
+
+        if(strcmp($entry['browser'],"Firefox")==0){
+
+          array_push($browser_index_speed, array("browser"=>'0',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Chrome")==0){
+
+          array_push($browser_index_speed, array("browser"=>'1',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Internet Explorer")==0){
+
+          array_push($browser_index_speed, array("browser"=>'2',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Safari")==0){
+
+          array_push($browser_index_speed, array("browser"=>'3',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Edge")==0){
+
+          array_push($browser_index_speed, array("browser"=>'4',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Opera")==0){
+
+          array_push($browser_index_speed, array("browser"=>'5',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Mobile")==0){
+
+          array_push($browser_index_speed, array("browser"=>'6',"netspeed"=>$entry['netspeed']));
+
+        }
+        if(strcmp($entry['browser'],"Unknown Browser")==0){
+
+          array_push($browser_index_speed, array("browser"=>'7',"netspeed"=>$entry['netspeed']));
+
+        }
+
+      }
+
+
+      for($i=0; $i<=7; $i++){
+
+        foreach($browser_index_speed as $entry){
+            if (intval($entry['browser'])== $i){
+
+              $hitsbybrowser[$i]+=1;
+            }
+        }
+      }
+      
+
+      for($i=0; $i<=7; $i++){
+
+        foreach($browser_index_speed as $entry){
+            if (intval($entry['browser'])== $i){
+
+                $mediumbybrowser[$i]+=(float)$entry['netspeed'];
+
+            }
+        }
+
+        if($hitsbybrowser[$i]=='0'){
+          $mediumbybrowser[$i]='0';
+        }
+        else{
+          $mediumbybrowser[$i]=$mediumbybrowser[$i]/$hitsbybrowser[$i];
+        }
+      }
+      
+      //var_dump($hitsbybrowser);
+      //var_dump($mediumbybrowser);
 
       $myfile = fopen('txtfiles_todisplay/browser.txt', 'w+') or die("Unable to open file!");
-      foreach($browser as $item){
-        fwrite($myfile, $item."\n");
+      foreach($mediumbybrowser as $item){
+         fwrite($myfile, $item."\n");
       }
   
       fclose($file);
@@ -50,7 +128,7 @@
         <canvas id="myChart"></canvas>
         <div class="buttoncontainer">
           <button onclick="window.location.href='seemore2.php'">Previous</button>
-          <button onclick="window.location.href='seemore.php'" id= "button">Next</button>
+          <button onclick="window.location.href='seemore6.php'" id= "button">Next</button>
         </div>
     </div>
     
@@ -79,14 +157,14 @@
         
         // Global Options
         Chart.defaults.global.defaultFontFamily = 'Lato';
-        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontSize = 14;
         Chart.defaults.global.defaultFontColor = '#777';
 
-        var experience =['User Experience - 0', 'User Experience - 1', 'User Experience - 2','User Experience - 3','User Experience - 4'];
+        var browser =['Firefox', 'Chrome', 'Internet Explorer', 'Safari','Edge', 'Opera', 'Mobile', 'Unknown'];
         let massPopChart = new Chart(myChart, {
-          type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
           data:{
-            labels: experience,
+            labels: browser,
             datasets:[
             {
                 label:'Network speed - medium',
@@ -94,9 +172,12 @@
                     res[1],
                     res[2],
                     res[3],
-                    res[4]  
+                    res[4],
+                    res[5],
+                    res[6],
+                    res[7]  
               ],
-              backgroundColor:'rgba(255, 0, 0, 0.5)',
+              backgroundColor:'rgba(94,33,41, 0.5)',
               borderWidth:2,
               borderColor:'#8b0000',
               hoverBorderWidth:3,
@@ -107,7 +188,7 @@
           options:{
             title:{
               display:true,
-              text:'FEUP Eduroam - Network Speed (in Mbps) vs User Experience',
+              text:'FEUP Eduroam - Network Speed (in Kbps) vs Used Browser',
               fontSize:30
             },
             legend:{
