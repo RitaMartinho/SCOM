@@ -48,6 +48,12 @@
 
         <img class= "ex" src="exclamacao.png" alt="feup logo" width="45" height="45"> 
 
+        <div class="container_button">
+                <p>Click on "See More" to know more about our collected data</p>
+                <button onclick="window.location.href='seemore.php'" id= "button">See More</button>            </form>
+        </div>
+
+
     </div>
     
  </body>

@@ -58,9 +58,9 @@
     }
 
     //ELETROTECNICA/INFO
-    if($lat < 41.178485 and $lat < 41.178446 and $lat > 41.177994 and $lat > 41.177958 ){
+    if($lat < 41.178485 and $lat < 41.178288 and $lat > 41.177994 and $lat > 41.177938 ){
 
-        if($long < 8.595568 and $long > 8.594836 and $long < 8.595614 and $long > 8.594876){
+        if($long < 8.595568 and $long > 8.5947226 and $long < 8.595614 and $long > 8.594769){
             print_r("eletro/info\n");
             $loc=6;
         }

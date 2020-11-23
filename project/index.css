@@ -58,3 +58,19 @@ input[type=submit] {
 #warning{
     text-align: center;
 }
+
+.container_button #button {
+    font-size: 100%;
+    padding:5px 15px; 
+    background:#A9A9A9;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+
+.container_button {
+
+    padding-top: 5%;
+    text-align: center;
+}

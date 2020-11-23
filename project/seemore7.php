@@ -61,13 +61,34 @@
         $mediumspeedbyexp[$i]=$mediumspeedbyexp[$i]/$hitsbyexp[$i];  
       }
 
+      for($i=0; $i<=4; $i++){
+
+        foreach($net_exp as $entry){
+            if (intval($entry['experience'])== $i){
+
+                $dev_sum_speedbyexp[$i]+=pow($entry['netspeed']-$mediumspeedbyexp[$i],2);
+            }
+        }
+      }
+
+      for($i=0; $i<=4; $i++){
+
+        $devspeedbyexp[$i]=sqrt($dev_sum_speedbyexp[$i]/$hitsbyexp[$i]);
+      }
+
       $myfile = fopen('txtfiles_todisplay/mediumload_by_exp.txt', 'w+') or die("Unable to open file!");
       foreach($mediumspeedbyexp as $item){
         fwrite($myfile, $item."\n");
       }
+
+      $file2=fopen('txtfiles_todisplay/devload_by_exp.txt', 'w+') or die("Unable to open file!");
+      foreach($devspeedbyexp as $item){
+        fwrite($file2, $item."\n");
+      }
+    
   
       fclose($file);
-      fclose($file1);
+      fclose($myfile);
       fclose($file2);
 
 
@@ -103,7 +124,23 @@
         rawFile.send(null);  
         var res = allText.split("\n");
 
-        
+        var rawFile1 = new XMLHttpRequest();
+        rawFile1.open("GET", "txtfiles_todisplay/devload_by_exp.txt", false); // using synchronous call
+        var allText1;
+        //alert("Starting to read text");
+        rawFile1.onreadystatechange = function ()
+        {   
+            if(rawFile1.readyState === 4)
+            {
+                if(rawFile1.status === 200 || rawFile1.status == 0)
+                {
+                    allText1 = rawFile1.responseText;
+                }
+            }
+        }
+        rawFile1.send(null);  
+        var res1 = allText1.split("\n");
+
         // Global Options
         Chart.defaults.global.defaultFontFamily = 'Lato';
         Chart.defaults.global.defaultFontSize = 18;
@@ -116,7 +153,7 @@
             labels: experience,
             datasets:[
             {
-                label:'medium',
+                label:'Load Page Time - medium',
                 data: [res[0],
                     res[1],
                     res[2],
@@ -126,6 +163,20 @@
               backgroundColor:'rgba(151, 99, 145, 0.5)',
               borderWidth:2,
               borderColor:'#8b0000',
+              hoverBorderWidth:3,
+              hoverBorderColor:'#000'
+            },
+            {
+                label:'Load Page Time - standard deviation',
+                data: [res1[0],
+                    res1[1],
+                    res1[2],
+                    res1[3],
+                    res1[4]  
+              ],
+              backgroundColor:'rgba(0, 255, 255, 0.5)',
+              borderWidth:2,
+              borderColor: 'lightblue',
               hoverBorderWidth:3,
               hoverBorderColor:'#000'
             } 
